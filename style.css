@@ -90,3 +90,27 @@ section {
   text-align: center;
   background: #1e293b;
 }
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
