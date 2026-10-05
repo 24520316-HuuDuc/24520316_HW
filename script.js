@@ -8,6 +8,7 @@ const frequencies = {
 };
 
 function playSound(soundName) {
+    recordBeat(soundName);
   const frequency = frequencies[soundName];
 
   if (!frequency) {
@@ -57,4 +58,12 @@ document.addEventListener("keydown", (event) => {
 });
 if (event.repeat) {
   return;
+}
+const beatRecorder = [];
+
+function recordBeat(soundName) {
+  beatRecorder.push({
+    sound: soundName,
+    timestamp: Date.now()
+  });
 }
