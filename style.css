@@ -115,3 +115,11 @@ select:focus {
   outline: 3px solid #facc15;
   outline-offset: 3px;
 }
+#contact a {
+  color: #7dd3fc;
+}
+
+#contact a:hover,
+#contact a:focus {
+  color: #bae6fd;
+}
