@@ -1,6 +1,8 @@
-const deadline = new Date(
-  "2026-12-31T23:59:59Z"
-);
+// ==============================
+// Slice 1: Drift-Free Countdown
+// ==============================
+
+const deadline = new Date("2026-12-31T23:59:59Z");
 
 const countdownElement = document.querySelector("#countdown");
 
@@ -26,6 +28,12 @@ function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 250);
+
+
+// ==============================
+// Slice 2: Form State Machine
+// ==============================
+
 const form = document.querySelector("#event-form");
 const nameInput = document.querySelector("#name");
 const submitButton = document.querySelector("#submit-button");
@@ -42,9 +50,11 @@ let currentState = FORM_STATE.IDLE;
 
 function setFormState(nextState) {
   currentState = nextState;
+
   formStatus.textContent = nextState;
 
-  submitButton.disabled = nextState === FORM_STATE.SUBMITTING;
+  submitButton.disabled =
+    nextState === FORM_STATE.SUBMITTING;
 }
 
 form.addEventListener("submit", (event) => {
