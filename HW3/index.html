@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resilient Event Hub</title>
+</head>
+
+<body>
+  <main>
+    <h1>Resilient Event Hub</h1>
+
+    <section aria-labelledby="countdown-title">
+      <h2 id="countdown-title">Countdown</h2>
+
+      <p id="countdown">Loading...</p>
+    </section>
+
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Event Registration</h2>
+
+      <form id="event-form">
+        <label for="name">Name</label>
+
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        >
+
+        <button type="submit" id="submit-button">
+          Submit
+        </button>
+
+        <p id="form-status" role="status">Idle</p>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
