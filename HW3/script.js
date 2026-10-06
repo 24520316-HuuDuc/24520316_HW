@@ -1,37 +1,5 @@
 // ==============================
-// Slice 1: Drift-Free Countdown
-// ==============================
-
-const deadline = new Date("2026-12-31T23:59:59Z");
-
-const countdownElement = document.querySelector("#countdown");
-
-function updateCountdown() {
-  const now = Date.now();
-  const remaining = deadline.getTime() - now;
-
-  if (remaining <= 0) {
-    countdownElement.textContent = "Event started";
-    return;
-  }
-
-  const totalSeconds = Math.floor(remaining / 1000);
-
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  countdownElement.textContent =
-    `${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-
-updateCountdown();
-setInterval(updateCountdown, 250);
-
-
-// ==============================
-// Slice 2: Form State Machine
+// Slice 2 + Slice 3: Form
 // ==============================
 
 const form = document.querySelector("#event-form");
@@ -53,25 +21,42 @@ function setFormState(nextState) {
 
   formStatus.textContent = nextState;
 
-  submitButton.disabled =
-    nextState === FORM_STATE.SUBMITTING;
+  const isSubmitting = nextState === FORM_STATE.SUBMITTING;
+
+  submitButton.disabled = isSubmitting;
+  submitButton.textContent = isSubmitting
+    ? "Submitting..."
+    : "Submit";
+}
+
+function sanitizeInput(value) {
+  return value
+    .trim()
+    .replace(/[\u0000-\u001F\u007F]/g, "")
+    .slice(0, 100);
 }
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  // Double-submit prevention
   if (currentState === FORM_STATE.SUBMITTING) {
     return;
   }
 
+  const safeName = sanitizeInput(nameInput.value);
+
   setFormState(FORM_STATE.SUBMITTING);
 
   setTimeout(() => {
-    if (nameInput.value.trim() === "") {
+    if (safeName.length === 0) {
       setFormState(FORM_STATE.ERROR);
       return;
     }
 
     setFormState(FORM_STATE.SUCCESS);
+
+    // textContent prevents user input from being interpreted as HTML.
+    formStatus.textContent = `Success: Welcome, ${safeName}`;
   }, 1000);
 });
